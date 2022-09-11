@@ -1,0 +1,25 @@
+# workflow이름, 나중에 해당 값을 사용할 수 있기 때문에 유니크하게 사용
+name: 'actionTest'
+
+# workflow를 동작하게 하는 trigger
+# repository에 push 이벤트가 발생할 때마다 실행
+# push 말고도 여러 이벤트들이 있음.
+on: push
+
+jobs:
+  test:
+    # jobs의 이름
+    name: mergeTest
+    # 환경 (우분투로 지금은 지정)
+    runs-on: ubuntu-latest
+    steps:
+      # checkout하고 나서 실행. 꼭 필요
+      # 현재 사용하는건 누군가 만들어놓은 (도커허브에서 가져오는것과 같음) Action을 사용
+      # 만약 만들어 놓은 Action을 사용하는 거라면 uses 라는 키워드를 사용해야 함.
+      - uses: actions/checkout@v2
+
+      # 해당 환경을 Node.js 에서 실행하겠다는 명시
+      # 이것 또한 누군가 만들어 놓은 Action
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        
